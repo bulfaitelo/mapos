@@ -341,7 +341,9 @@ class Mapos extends MY_Controller
         $this->form_validation->set_rules('app_theme', 'Tema do Sistema', 'required|trim');
         $this->form_validation->set_rules('os_notification', 'Notificação de OS', 'required|trim');
         $this->form_validation->set_rules('control_estoque', 'Controle de Estoque', 'required|trim');
-
+        $this->form_validation->set_rules('notifica_whats', 'Notificação Whatsapp', 'required|trim');
+        $this->form_validation->set_rules('control_baixa', 'Controle de Baixa', 'required|trim');
+        
         if ($this->form_validation->run() == false) {
             $this->data['custom_error'] = (validation_errors() ? '<div class="alert">' . validation_errors() . '</div>' : false);
         } else {
@@ -351,8 +353,9 @@ class Mapos extends MY_Controller
                 'app_theme' => $this->input->post('app_theme'),
                 'os_notification' => $this->input->post('os_notification'),
                 'control_estoque' => $this->input->post('control_estoque'),
+                'notifica_whats' => $this->input->post('notifica_whats'),
+                'control_baixa' => $this->input->post('control_baixa'),
             ];
-
             if ($this->mapos_model->saveConfiguracao($data) == true) {
                 $this->session->set_flashdata('success', 'Configurações do sistema atualizadas com sucesso!');
                 redirect(site_url('mapos/configurar'));

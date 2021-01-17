@@ -69,6 +69,7 @@ class Os extends MY_Controller
             $this->uri->segment(3)
         );
 
+        $this->data['texto_de_notificacao'] = $this->data['configuration']['notifica_whats'];
         $this->data['emitente'] = $this->mapos_model->getEmitente();
         $this->data['view'] = 'os/os';
         return $this->layout();
@@ -159,7 +160,7 @@ class Os extends MY_Controller
                     $this->enviarOsPorEmail($idOs, $remetentes, 'Ordem de Serviço - Criada');
                 }
 
-                $this->session->set_flashdata('success', 'OS adicionada com sucesso, você pode adicionar produtos ou serviços a essa OS nas abas de "Produtos" e "Serviços"!');
+                $this->session->set_flashdata('success', 'OS adicionada com sucesso, você pode adicionar produtos ou serviços a essa OS nas abas de Produtos e Serviços!');
                 log_info('Adicionou uma OS');
                 redirect(site_url('os/editar/') . $id);
             } else {
@@ -185,6 +186,7 @@ class Os extends MY_Controller
 
         $this->load->library('form_validation');
         $this->data['custom_error'] = '';
+        $this->data['texto_de_notificacao'] = $this->data['configuration']['notifica_whats'];
 
         if ($this->form_validation->run('os') == false) {
             $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">' . validation_errors() . '</div>' : false);
@@ -287,6 +289,8 @@ class Os extends MY_Controller
         }
 
         $this->data['custom_error'] = '';
+        $this->data['texto_de_notificacao'] = $this->data['configuration']['notifica_whats'];
+        
         $this->load->model('mapos_model');
         $this->load->model('pagamentos_model');
 
@@ -355,7 +359,6 @@ class Os extends MY_Controller
             ];
             if ($this->os_model->add('cobrancas', $data) == true) {
                 log_info('Cobrança (OS) criada com suceso. ID: ' . $obj->data->charge_id);
-                $this->session->set_flashdata('success', 'Cobrança criada com sucesso!');
             }
         } else {
             $json = ['code' => $obj->code, 'error' => $obj->error , 'errorDescription' => $obj->errorDescription ];
@@ -408,7 +411,6 @@ class Os extends MY_Controller
             ];
             if ($this->os_model->add('cobrancas', $data) == true) {
                 log_info('Cobrança criada com suceso. ID: ' . $obj->data->charge_id);
-                $this->session->set_flashdata('success', 'Cobrança criada com sucesso!');
             }
         } else {
             $json = ['code' => $obj->code, 'error' => $obj->error , 'errorDescription' => $obj->errorDescription ];
