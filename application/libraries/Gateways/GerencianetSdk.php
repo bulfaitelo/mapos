@@ -176,7 +176,7 @@ class GerencianetSdk extends BasePaymentGateway
             throw new \Exception('OS ou venda com valor negativo ou zero!');
         }
 
-        if($err = $this->errosCadastro($entity)) {
+        if ($err = $this->errosCadastro($entity)) {
             throw new \Exception($err);
         }
         
@@ -211,7 +211,6 @@ class GerencianetSdk extends BasePaymentGateway
                 'address' => $address,
             ];
         }
-
         $expirationDate = (new DateTime())->add(new DateInterval($this->gerenciaNetConfig['boleto_expiration']));
         $expirationDate = ($expirationDate->format('Y-m-d'));
         $body = [
@@ -302,7 +301,7 @@ class GerencianetSdk extends BasePaymentGateway
             throw new \Exception('OS ou venda com valor negativo ou zero!');
         }
 
-        if($err = $this->errosCadastro($entity)) {
+        if ($err = $this->errosCadastro($entity)) {
             throw new \Exception($err);
         }
 
