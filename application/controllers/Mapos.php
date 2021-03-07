@@ -363,6 +363,7 @@ class Mapos extends MY_Controller
                 'control_editos' => $this->input->post('control_editos'),
                 'control_datatable' => $this->input->post('control_datatable'),
                 'pix_key' => $this->input->post('pix_key'),
+                'os_status_list' => json_encode($this->input->post('os_status_list')),                
             ];
             if ($this->mapos_model->saveConfiguracao($data) == true) {
                 $this->session->set_flashdata('success', 'Configurações do sistema atualizadas com sucesso!');

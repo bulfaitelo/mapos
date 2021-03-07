@@ -81,8 +81,7 @@
                         } else {
                             $dataFinal = "";
                         }
-
-                        if ($this->input->get('pesquisa') !== '' && $r->status === "Faturado") {
+                        if ($this->input->get('pesquisa') !== '' && in_array($r->status, json_decode($configuration['os_status_list'])) != true ) {
                             continue;
                         }
 
