@@ -82,16 +82,11 @@
                             $dataFinal = "";
                         }                       
                         if ($this->input->get('pesquisa') === null && is_array(json_decode($configuration['os_status_list']))) {
-                            if(in_array($r->status, json_decode($configuration['os_status_list'])) != true){                                
+                            if (in_array($r->status, json_decode($configuration['os_status_list'])) != true) {                                
                                 continue;
                             }
                         }
-                        if ($this->input->get('pesquisa') === null && is_array(json_decode($configuration['os_status_list']))) {
-                            if(in_array($r->status, json_decode($configuration['os_status_list'])) != true){                                
-                                continue;
-                            }
-                        }
-
+                                                
                         switch ($r->status) {
                             case 'Aberto':
                                 $cor = '#00cd00';
